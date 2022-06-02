@@ -1,0 +1,51 @@
+{
+  "title": "project",
+  "type": "object",
+  "description": "project structure",
+  "properties": {
+    "clientId": {
+      "type": "string",
+      "description": "รหัสผู้ขอใช้งาน UUID"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "รหัสโครงการ UUID"
+    },
+    "code": {
+      "type": "string",
+      "description": "รหัสโครงการของ developer"
+    },
+    "name": {
+      "type": "string",
+      "description": "ชื่อโครงการ"
+    },
+    "nameEn": {
+      "type": "string",
+      "description": "ชื่อโครงการ En"
+    },
+    "address": {
+      "type": "string",
+      "description": "ที่อยู่"
+    },
+    "addressEn": {
+      "type": "string",
+      "description": "ที่อยู่ En"
+    },
+    "description": {
+      "type": "string",
+      "description": "คำอธิบาย"
+    },
+    "descriptionEn": {
+      "type": "string",
+      "description": "คำอธิบาย En"
+    },
+    "isDisabled": {
+      "description": "สถานะระงับการใช้งาน",
+      "type": "boolean"
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "สถานะลบข้อมูล"
+    }
+  }
+}

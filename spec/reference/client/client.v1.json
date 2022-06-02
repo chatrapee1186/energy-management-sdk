@@ -1,0 +1,750 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Client",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "https://mea-management-sdk-api.qa.mapboss.co.th/"
+    }
+  ],
+  "paths": {
+    "/client": {
+      "parameters": [],
+      "post": {
+        "summary": "Create a Client",
+        "operationId": "post-client",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/client.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "เพิ่ม client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "ชื่อของ client",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "รหัสผู้ใช้งาน",
+                    "maxLength": 36,
+                    "format": "uuid",
+                    "minLength": 0
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "รายละเอียด",
+                    "maxLength": 5000,
+                    "minLength": 0
+                  },
+                  "webhookUrl": {
+                    "type": "string",
+                    "description": "urlwebhook ของ client",
+                    "format": "uri",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "isDisabled": {
+                    "type": "boolean",
+                    "description": "สถานะระงับการใช้งาน"
+                  }
+                },
+                "required": [
+                  "name",
+                  "userId",
+                  "isDisabled"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/client/{clientId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "clientId",
+          "in": "path",
+          "required": true,
+          "description": "รหัส client"
+        }
+      ],
+      "get": {
+        "summary": "Get a Client",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/client.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-client-clientId",
+        "description": "แสดงรายละเอียด",
+        "parameters": []
+      },
+      "put": {
+        "summary": "Update a Client",
+        "operationId": "put-client-clientId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/client.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "แก้ไข",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "ชื่อของ client",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "userId": {
+                    "type": "string",
+                    "maxLength": 36,
+                    "description": "รหัสผู้ใช้งาน",
+                    "minLength": 0,
+                    "format": "uuid"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "รายละเอียด",
+                    "maxLength": 5000,
+                    "minLength": 0
+                  },
+                  "webhookUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "maxLength": 255,
+                    "minLength": 0,
+                    "description": "urlwebhook ของ client"
+                  },
+                  "isDisabled": {
+                    "type": "boolean",
+                    "description": "สถานะการระงับการใช้งาน"
+                  },
+                  "isDeleted": {
+                    "description": "สถานะการลบ",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "name",
+                  "userId",
+                  "isDisabled",
+                  "isDeleted"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/search": {
+      "get": {
+        "summary": "Search Client",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "count": {
+                      "type": "number",
+                      "description": "จำนวนของข้อมูล"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientCode": {
+                            "type": "string",
+                            "description": "รหัส Client Code"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "ชื่อ developer"
+                          },
+                          "isDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะ"
+                          },
+                          "projectCount": {
+                            "type": "number",
+                            "description": "จำนวน project ของ client"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-client-search",
+        "description": "ค้นหา client",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 255,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "name",
+            "description": "ชื่อของ Client",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "จำนวนข้อมูลที่จำกัด",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "ข้อมูลเริ่มต้น",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isDisabled",
+            "description": "สถานะพร้อมใช้งาน",
+            "allowEmptyValue": false
+          }
+        ]
+      }
+    },
+    "/client/disable": {
+      "put": {
+        "summary": "Update Client Disable",
+        "operationId": "put-client-disable",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "clientId": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ระงับการใช้งาน Client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientId": {
+                    "type": "array",
+                    "description": "List client ที่ต้องการระงับการใช้งาน",
+                    "items": {
+                      "type": "string",
+                      "example": "['clientId_01','clientId_02','clientId_03']",
+                      "format": "uuid"
+                    }
+                  }
+                },
+                "required": [
+                  "clientId"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/client/delete": {
+      "put": {
+        "summary": "Update Client Delete",
+        "operationId": "put-client-delete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "clientId": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ลบหลาย client",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientId": {
+                    "type": "array",
+                    "description": "List client ที่ต้องการลบ",
+                    "items": {
+                      "type": "string",
+                      "example": "['clientId_01','clientId_02','clientId_03']",
+                      "format": "uuid"
+                    }
+                  }
+                },
+                "required": [
+                  "clientId"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

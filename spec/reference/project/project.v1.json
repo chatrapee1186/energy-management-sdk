@@ -1,0 +1,914 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Project",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "https://mea-management-sdk-api.qa.mapboss.co.th/"
+    }
+  ],
+  "paths": {
+    "/project/": {
+      "post": {
+        "summary": "/project/",
+        "operationId": "post-project",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/project.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "เพิ่ม project",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "clientId": {
+                    "type": "string",
+                    "description": "รหัสผู้ขอใช้งาน (client id)",
+                    "maxLength": 36
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "ชื่อโครงการ",
+                    "maxLength": 255
+                  },
+                  "code": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "userId": {
+                    "type": "string",
+                    "maxLength": 255
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "ที่อยู่",
+                    "maxLength": 5000
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "ที่อยู่",
+                    "maxLength": 5000
+                  },
+                  "isDisabled": {
+                    "type": "boolean",
+                    "description": "สถานะระงับการใช้งาน"
+                  }
+                },
+                "required": [
+                  "clientId",
+                  "name",
+                  "code",
+                  "userId",
+                  "address",
+                  "isDisabled"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project/search": {
+      "get": {
+        "summary": "/project/search",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "count": {
+                      "type": "number",
+                      "description": "จำนวนของข้อมูล"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "projectId": {
+                            "type": "string",
+                            "description": "รหัสโครงการ (UUID)"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "ชื่อโครงการ"
+                          },
+                          "isDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะ"
+                          },
+                          "address": {
+                            "type": "string",
+                            "description": "ที่อยู่"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "ผู้ขอใช้งาน"
+                          },
+                          "clientIsDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะผู้ขอใช้งาน"
+                          },
+                          "allowedMeterCount": {
+                            "type": "number",
+                            "description": "จำนวน meter ของ project"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-project-search",
+        "description": "ค้นหา",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 255,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "name",
+            "description": "ชื่อโครงการ",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 36,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "clientId",
+            "description": "รหัสผู้ขอใช้งาน",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isDisabled",
+            "description": "สถานะ"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "จำนวนข้อมูลที่จำกัด"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "ข้อมูลเริ่มต้น"
+          }
+        ]
+      }
+    },
+    "/project/{projectId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "maxLength": 36,
+            "format": "uuid",
+            "minLength": 0
+          },
+          "name": "projectId",
+          "in": "path",
+          "description": "รหัส project",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get a Project",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/project.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-project-projectId",
+        "description": "แสดงรายละเอียด"
+      },
+      "put": {
+        "summary": "Update a Project",
+        "operationId": "put-project-projectId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/project.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "แก้ไข",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "ชื่อโครงการ",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "isDisabled": {
+                    "description": "สถานะระงับการใช้งาน",
+                    "type": "boolean"
+                  },
+                  "isDeleted": {
+                    "type": "boolean",
+                    "description": "สถานะการลบ"
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "description": "รหัสผู้ขอใช้งาน (client id)",
+                    "maxLength": 36,
+                    "minLength": 0,
+                    "format": "uuid"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "ที่อยู่",
+                    "maxLength": 5000,
+                    "minLength": 0
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "รายละเอียด",
+                    "maxLength": 5000,
+                    "minLength": 0
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "รหัสผู้ใช้งาน",
+                    "maxLength": 36,
+                    "minLength": 0,
+                    "format": "uuid"
+                  }
+                },
+                "required": [
+                  "name",
+                  "isDisabled",
+                  "clientId",
+                  "address",
+                  "userId",
+                  "isDeleted"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project/import": {
+      "post": {
+        "summary": "Import Projects",
+        "operationId": "post-project-import",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "count": {
+                          "type": "number",
+                          "description": "จำนวน record ที่ import สำเร็จ"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "description": "ข้อความ error รายบรรทัด",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "description": "ไฟล์ excel, csv",
+                    "format": "binary"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "รหัสผู้ใช้งาน",
+                    "maxLength": 36,
+                    "minLength": 0,
+                    "format": "uuid"
+                  },
+                  "clientId": {
+                    "type": "string",
+                    "minLength": 0,
+                    "maxLength": 36,
+                    "description": "รหัส client"
+                  }
+                },
+                "required": [
+                  "file",
+                  "userId",
+                  "clientId"
+                ]
+              }
+            }
+          },
+          "description": ""
+        },
+        "description": "เพิ่ม project ด้วย excel, csv\n\n**csv ต้องคั่นด้วย |"
+      }
+    },
+    "/project/disable": {
+      "put": {
+        "summary": "Update Client Disable",
+        "operationId": "put-client-disable",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "projectId": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ระงับการใช้งาน Project",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "array",
+                    "description": "List project ที่ต้องการระงับการใช้งาน",
+                    "items": {
+                      "type": "string",
+                      "example": "['x','y','z']",
+                      "format": "uuid"
+                    }
+                  }
+                },
+                "required": [
+                  "projectId"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": []
+    },
+    "/project/delete": {
+      "put": {
+        "summary": "Update Client Delete",
+        "operationId": "put-client-delete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "projectId": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ลบหลาย Project",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "array",
+                    "description": "List project ที่ต้องการลบ",
+                    "items": {
+                      "type": "string",
+                      "example": "['x','y','z']",
+                      "format": "uuid"
+                    }
+                  }
+                },
+                "required": [
+                  "projectId"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  }
+}

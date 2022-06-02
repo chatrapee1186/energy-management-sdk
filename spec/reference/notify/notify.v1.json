@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "notify.v1",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/notify/send-outage/search": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-notify-send-outage-search",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 36,
+              "format": "uuid"
+            },
+            "in": "query",
+            "name": "clientId",
+            "description": "clientId"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 36,
+              "format": "uuid"
+            },
+            "in": "query",
+            "name": "projectId",
+            "description": "projectId"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 255
+            },
+            "in": "query",
+            "name": "meterNo",
+            "description": "meterNo"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "dateStart",
+            "description": "วันเริ่มต้น ดูจาก notifyDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "dateEnd",
+            "description": "วันสิ้นสุด ดูจาก notifyDate"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "ข้อมูลเริ่มต้น"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "จำนวนข้อมูลที่จำกัด default ที่ 50"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "meta": {
+                    "$ref": "../common/models/meta.v1.json"
+                  },
+                  "data": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "clientId": {
+                          "type": "string"
+                        },
+                        "clientCode": {
+                          "type": "string"
+                        },
+                        "clientName": {
+                          "type": "string"
+                        },
+                        "projectId": {
+                          "type": "string"
+                        },
+                        "projectName": {
+                          "type": "string"
+                        },
+                        "ca": {
+                          "type": "string"
+                        },
+                        "meterNo": {
+                          "type": "string"
+                        },
+                        "notifyDate": {
+                          "type": "string",
+                          "description": "วันที่แจ้งเหตุ"
+                        },
+                        "ffmStatus": {
+                          "type": "string",
+                          "description": "สถานะการแก้ไฟฟ้าขัดข้อง"
+                        },
+                        "ffmDoneDate": {
+                          "type": "string",
+                          "description": "วันที่แก้ไขไฟฟ้าขัดข้องเสร็จ"
+                        },
+                        "telNo": {
+                          "type": "string",
+                          "description": "เบอร์โทรศัพท์ที่แจ้ง"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Default ที่ 50 records ล่าสุด ในกรณีที่ไม่ส่ง parameter\n\nOrder by notifyDate DESC\n\nDate\nFormat -> ISO Date (YYYY-MM-DD)\nExample -> 2015-03-25"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

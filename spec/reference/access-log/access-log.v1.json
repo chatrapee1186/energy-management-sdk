@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Access Log",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "https://mea-management-sdk-api.qa.mapboss.co.th/",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/access-log/search": {
+      "get": {
+        "summary": "Access Log Search",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "count": {
+                      "type": "number"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string"
+                          },
+                          "clientCode": {
+                            "type": "string"
+                          },
+                          "clientName": {
+                            "type": "string"
+                          },
+                          "projectId": {
+                            "type": "string"
+                          },
+                          "projectName": {
+                            "type": "string"
+                          },
+                          "ca": {
+                            "type": "string"
+                          },
+                          "meterNo": {
+                            "type": "string"
+                          },
+                          "method": {
+                            "type": "string"
+                          },
+                          "accessDate": {
+                            "type": "string"
+                          },
+                          "apiKey": {
+                            "type": "string"
+                          },
+                          "sdkVersion": {
+                            "type": "string"
+                          },
+                          "sdkPlatform": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-access-log-search",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 36,
+              "format": "uuid"
+            },
+            "in": "query",
+            "name": "clientId",
+            "description": "clientId"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 36,
+              "format": "uuid"
+            },
+            "in": "query",
+            "name": "projectId",
+            "description": "projectId"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 255
+            },
+            "in": "query",
+            "name": "meterNo",
+            "description": "meterNo"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "dateStart",
+            "description": "ช่วงเวลาที่เริ่มของ createDate"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "dateEnd",
+            "description": "ช่วงเวลาสิ้นสุดของ createDate"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "ข้อมูลเริ่มต้น"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "จำนวนข้อมูลที่จำกัด"
+          }
+        ],
+        "description": "order by createDate DESC\n\nDate\nFormat -> ISO Date (YYYY-MM-DD)\nExample -> 2015-03-25"
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

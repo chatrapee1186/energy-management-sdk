@@ -1,0 +1,43 @@
+{
+  "title": "client",
+  "type": "object",
+  "description": "client structure",
+  "properties": {
+    "clientId": {
+      "type": "string",
+      "description": "UUID ของ client"
+    },
+    "clientCode": {
+      "type": "string",
+      "description": "รหัส Client Code"
+    },
+    "name": {
+      "type": "string",
+      "description": "ชื่อผู้ขอใช้งาน"
+    },
+    "nameEn": {
+      "type": "string",
+      "description": "ชื่อผู้ขอใช้งาน En"
+    },
+    "description": {
+      "type": "string",
+      "description": "คำอธิบาย"
+    },
+    "descriptionEn": {
+      "type": "string",
+      "description": "คำอธิบาย En"
+    },
+    "webhookUrl": {
+      "type": "string",
+      "description": "ีurl service"
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "description": "สถานะระงับการใช้งาน"
+    },
+    "isDeleted": {
+      "type": "boolean",
+      "description": "สถานะลบข้อมูล"
+    }
+  }
+}

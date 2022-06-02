@@ -1,0 +1,902 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "AllowedMeter",
+    "version": "1.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "https://mea-management-sdk-api.qa.mapboss.co.th/"
+    }
+  ],
+  "paths": {
+    "/allowedmeter": {
+      "post": {
+        "summary": "Add Allowedmeter",
+        "operationId": "post-allowmeter",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/allowedMeter.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "เพิ่มมิเตอร์ที่อนุญาต",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "projectId": {
+                    "type": "string",
+                    "description": "รหัสโครงการ",
+                    "maxLength": 36,
+                    "minLength": 0
+                  },
+                  "meterNo": {
+                    "type": "string",
+                    "description": "Meter No",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "ca": {
+                    "type": "string",
+                    "description": "หมายเลข ca",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "userId": {
+                    "type": "string",
+                    "maxLength": 36,
+                    "minLength": 0,
+                    "format": "uuid"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "ชื่อผู้ใช้งาน",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "ที่อยู่",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "isDisabled": {
+                    "type": "boolean",
+                    "description": "สถานะระงับการใช้งาน"
+                  }
+                },
+                "required": [
+                  "projectId",
+                  "meterNo",
+                  "ca",
+                  "userId",
+                  "name",
+                  "address",
+                  "isDisabled"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/allowedmeter/search": {
+      "get": {
+        "summary": "Search Allowedmeter",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "count": {
+                      "type": "number",
+                      "description": "จำนวนข้อมูล"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "allowMeterId": {
+                            "type": "string",
+                            "description": "รหัสมิเตอร์ที่อนุญาต"
+                          },
+                          "isDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะ"
+                          },
+                          "meterNo": {
+                            "type": "string",
+                            "description": "Meter No"
+                          },
+                          "address": {
+                            "type": "string",
+                            "description": "ที่อยู่"
+                          },
+                          "projectName": {
+                            "type": "string",
+                            "description": "ชื่อโครงการ"
+                          },
+                          "projectIsDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะโครงการ"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "ผู้ขอใช้งาน"
+                          },
+                          "clientIsDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะผู้ขอใช้งาน"
+                          },
+                          "ca": {
+                            "type": "string",
+                            "description": "หมายเลข ca"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-allowmeter-search",
+        "description": "ค้นหามิเตอร์ที่อนุญาต",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 255,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "meterNo",
+            "description": "ชื่อโครงการ",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 36,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "clientId",
+            "description": "รหัสผู้ขอใช้งาน",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 36,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "projectId",
+            "description": "รหัสโครงการ",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "isDisabled",
+            "description": "สถานะ",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "จำนวนข้อมูลที่จำกัด",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "offset",
+            "description": "ข้อมูลเริ่มต้น",
+            "allowEmptyValue": false
+          },
+          {
+            "schema": {
+              "type": "string",
+              "maxLength": 255,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "ca",
+            "description": "หมายเลข ca",
+            "allowEmptyValue": false
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/allowedmeter/{allowedMeterId}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "maxLength": 36,
+            "minLength": 0
+          },
+          "name": "allowedMeterId",
+          "in": "path",
+          "required": true,
+          "description": "รหัส allowedMeter"
+        }
+      ],
+      "get": {
+        "summary": "Get a Allowedmeter",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/allowedMeter.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-allowmeter-allowMeterId",
+        "description": "แสดงรายละเอียด"
+      },
+      "put": {
+        "summary": "Update a Allowedmeter",
+        "operationId": "put-allowmeter-allowMeterId",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "$ref": "../common/models/client.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "แก้ไข",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "ชื่อโครงการ",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "userId": {
+                    "type": "string",
+                    "description": "รหัสผู้ใช้งาน",
+                    "maxLength": 36,
+                    "format": "uuid",
+                    "minLength": 0
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "ที่อยู่",
+                    "maxLength": 255,
+                    "minLength": 0
+                  },
+                  "isDisabled": {
+                    "description": "สถานะระงับการใช้งาน",
+                    "type": "boolean"
+                  },
+                  "isDeleted": {
+                    "type": "boolean",
+                    "description": "สถานะการลบ"
+                  }
+                },
+                "required": [
+                  "name",
+                  "userId",
+                  "address",
+                  "isDisabled",
+                  "isDeleted"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/allowedmeter/auto-complete": {
+      "get": {
+        "summary": "Allowedmeter Auto Complete",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "text": {
+                          "type": "string",
+                          "description": "รหัสเครื่องวัดฯ ${meterNo} บัญชีแสดงสัญญา ${ca}"
+                        },
+                        "meterNo": {
+                          "type": "string"
+                        },
+                        "ca": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-allowedmeter-auto",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 0,
+              "maxLength": 255
+            },
+            "in": "query",
+            "name": "keyword",
+            "description": "meterNo or ca"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/allowedmeter/disable": {
+      "put": {
+        "summary": "Update Client Disable",
+        "operationId": "put-client-disable",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "allowedmeterId": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ระงับการใช้งาน Allowed meter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "allowedMeterId": {
+                    "type": "array",
+                    "description": "List meter ที่ต้องการระงับการใช้งาน",
+                    "items": {
+                      "type": "string",
+                      "example": "['x','y','z']",
+                      "format": "uuid"
+                    }
+                  }
+                },
+                "required": [
+                  "allowedMeterId"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": []
+    },
+    "/allowedmeter/delete": {
+      "put": {
+        "summary": "Update Client Delete",
+        "operationId": "put-client-delete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "allowedmeterId": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ลบหลาย Allowed meter",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "allowedmeterId": {
+                    "type": "array",
+                    "description": "List meter ที่ต้องการลบ",
+                    "items": {
+                      "type": "string",
+                      "example": "['x','y','z']",
+                      "format": "uuid"
+                    }
+                  }
+                },
+                "required": [
+                  "allowedmeterId"
+                ]
+              }
+            }
+          },
+          "description": ""
+        }
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}

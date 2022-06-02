@@ -1,0 +1,27 @@
+{
+  "title": "meta",
+  "type": "object",
+  "x-tags": [
+    "Common"
+  ],
+  "description": "the initial values for the request.",
+  "properties": {
+    "copyright": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "x-examples": {
+    "MAPBOSS": {
+      "copyright": "Copyright 2020 The Metropolitan Electricity Authority. All rights reserved.",
+      "authors": [
+        "MAPBOSS Co., Ltd."
+      ]
+    }
+  }
+}

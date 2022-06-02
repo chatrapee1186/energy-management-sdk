@@ -1,0 +1,234 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lookup",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "https://mea-management-sdk-api.qa.mapboss.co.th/"
+    }
+  ],
+  "paths": {
+    "/lookup/client": {
+      "get": {
+        "summary": "Get Lookup Client",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Primary data",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัสผู้ขอใช้งาน"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "ชื่อผู้ขอใช้งาน"
+                          },
+                          "isDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะระงับการใช้งาน"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "meta",
+                    "data"
+                  ]
+                },
+                "examples": {}
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-lookup-client",
+        "description": "lookup ผู้ขอใช้งาน",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "maxLength": 36,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "clientId",
+            "description": "รหัส client",
+            "allowEmptyValue": false
+          }
+        ]
+      }
+    },
+    "/lookup/project": {
+      "get": {
+        "summary": "Get Lookup Project",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "description": "Primary data",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัสผู้ขอใช้งาน"
+                          },
+                          "projectId": {
+                            "type": "string",
+                            "description": "รหัสโครงการ"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "ชื่อผู้ขอใช้งาน"
+                          },
+                          "isDisabled": {
+                            "type": "boolean",
+                            "description": "สถานะระงับการใช้งาน"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "required": [
+                    "meta",
+                    "data"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-lookup-project",
+        "description": "lookup โครงการ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "clientId",
+            "description": "รหัส Client"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "maxLength": 36,
+              "minLength": 0
+            },
+            "in": "query",
+            "name": "projectId",
+            "description": "รหัส project",
+            "allowEmptyValue": false
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "title": "errors",
+  "type": "array",
+  "x-examples": {
+    "400": [
+      {
+        "title": "MISSING_CLIENT_ID"
+      }
+    ],
+    "401": [
+      {
+        "title": "jwt malformed"
+      }
+    ],
+    "404": [
+      {
+        "title": "CLIENT_NOT_FOUND"
+      }
+    ],
+    "500": [
+      {
+        "code": "INTERNAL_SERVER_ERROR",
+        "title": "Internal server error.",
+        "detail": "Multipart: Boundary not found"
+      }
+    ]
+  },
+  "items": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "detail": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "title"
+    ]
+  },
+  "description": "errors pattern"
+}

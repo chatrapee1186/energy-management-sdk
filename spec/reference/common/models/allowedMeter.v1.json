@@ -1,0 +1,47 @@
+{
+  "title": "allowedMeter",
+  "type": "object",
+  "description": "allowedMeter structure",
+  "properties": {
+    "allowedMeterId": {
+      "type": "string",
+      "description": "รหัสมิเตอร์ที่อนุญาต"
+    },
+     "clientId": {
+      "type": "string",
+      "description": "รหัส Client"
+    },
+    "projectId": {
+      "type": "string",
+      "description": "รหัสโครงการ UUID"
+    },
+    "meterNo": {
+      "type": "string",
+      "description": "Meter No"
+    },
+    "address": {
+      "type": "string",
+      "description": "ที่อยู่"
+    },
+    "isDisabled": {
+      "type": "boolean",
+      "description": "สถานะระงับการใช้งาน"
+    },
+    "ca": {
+      "type": "string",
+      "description": "CA Number"
+    },
+    "name": {
+      "type": "string",
+      "description": "ชื่อผู้ใช้ไฟฟ้า"
+    },
+    "x": {
+      "type": "string",
+      "description": "พิกัดแกน x"
+    },
+    "y": {
+      "type": "string",
+      "description": "พิกัดแกน y"
+    }
+  }
+}

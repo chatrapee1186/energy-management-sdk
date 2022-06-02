@@ -1,0 +1,144 @@
+variables:
+    IMAGE: $CI_REGISTRY_IMAGE
+
+stages:
+    - build
+    - publish
+    - deploy
+
+build:
+    stage: build
+    cache:
+        key: $CI_PROJECT_NAME
+        paths:
+            - node_modules/
+    script:
+        - npm i && npm run build
+    artifacts:
+        paths:
+            - dist/
+    only:
+        - qa
+        - master
+    tags:
+        - awhere
+
+.publish:template: &publish_definition
+    stage: publish
+    before_script:
+        - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    script:
+        - docker build --memory 1g --pull --cache-from "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}" -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}" --network public .
+        - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
+    only:
+        - qa
+        - master
+    tags:
+        - awhere
+
+publish:
+    <<: *publish_definition
+
+.deploy: &deploy_definition
+    stage: deploy
+    before_script:
+        - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" $CI_REGISTRY
+    script:
+        - docker pull ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+        - docker rm -f ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME} || true
+        - docker run -d 
+            --name ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME} 
+            --net public 
+            --restart unless-stopped 
+            --env-file ${ENV_INTERNAL} 
+            --label traefik.enable=true 
+            --label traefik.port=5000 
+            --label traefik.frontend.rule="Host:${DOMAIN_NAME}.mapboss.co.th" 
+            --label traefik.docker.network=public 
+            --link sqlsvr:mssql.mapboss.co.th 
+            --link mea-so-rabbit:rabbit.mapboss.co.th 
+            --link traefik:mea-so-sso.stage.mapboss.co.th 
+            "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
+    tags:
+        - awhere
+
+.deploy: &deploy_definition_dev
+    stage: deploy
+    before_script:
+        - docker login -u "${CI_REGISTRY_USER}" -p "${CI_REGISTRY_PASSWORD}" $CI_REGISTRY
+    script:
+        - docker pull ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}
+        - docker rm -f ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-dev || true
+        - docker run -d 
+            --name ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}-dev 
+            --net public 
+            --restart unless-stopped 
+            --env-file ${ENV_INTERNAL_dev} 
+            --label traefik.enable=true 
+            --label traefik.port=5000 
+            --label traefik.frontend.rule="Host:${DOMAIN_NAME}.mapboss.co.th" 
+            --label traefik.docker.network=public 
+            --link sqlsvr:mssql.mapboss.co.th 
+            --link mea-so-rabbit:rabbit.mapboss.co.th 
+            --link traefik:mea-so-sso.stage.mapboss.co.th 
+            "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}"
+    tags:
+        - awhere
+
+deploy:qa:
+    variables:
+        DOMAIN_NAME: mea-management-sdk-api.qa
+    <<: *deploy_definition
+    environment:
+        name: qa
+        on_stop: stop:deploy:qa
+    only:
+        - qa
+
+deploy:qa-dev:
+    variables:
+        DOMAIN_NAME: mea-management-sdk-api.dev
+    <<: *deploy_definition_dev
+    environment:
+        name: qa
+        on_stop: stop:deploy:qa
+    only:
+        - qa
+
+deploy:stage:
+    variables:
+        DOMAIN_NAME: mea-management-sdk-api.stage
+    <<: *deploy_definition
+    environment:
+        name: stage
+        on_stop: stop:deploy:stage
+    only:
+        - master
+
+.stop:deploy: &stop
+    stage: deploy
+    variables:
+        GIT_STRATEGY: none
+    script:
+        - docker rm -f ${CI_PROJECT_NAME}-${CI_COMMIT_REF_NAME}
+    when: manual
+    tags:
+        - awhere
+
+stop:deploy:qa:
+    <<: *stop
+    stage: deploy
+    environment:
+        name: qa
+        action: stop
+    only:
+        - qa
+
+stop:deploy:stage:
+    <<: *stop
+    stage: deploy
+    environment:
+        name: stage
+        action: stop
+    only:
+        - master

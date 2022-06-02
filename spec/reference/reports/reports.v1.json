@@ -1,0 +1,989 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Reports",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000"
+    },
+    {
+      "url": "https://mea-management-sdk-api.qa.mapboss.co.th/",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/reports/client": {
+      "get": {
+        "summary": "Report Client",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "projectCount": {
+                            "type": "number",
+                            "description": "จำนวนโครงการของ Client"
+                          },
+                          "allowedMeterCount": {
+                            "type": "number",
+                            "description": "จำนวนมิเตอร์ของ Client"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-reports-client"
+      }
+    },
+    "/reports/access/sum-month": {
+      "get": {
+        "summary": "Report Sum Month",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "countM1": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 1"
+                          },
+                          "countM2": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 2"
+                          },
+                          "countM3": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 3"
+                          },
+                          "countM4": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 4"
+                          },
+                          "countM5": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 5"
+                          },
+                          "countM6": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 6"
+                          },
+                          "countM7": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 7"
+                          },
+                          "countM8": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 8"
+                          },
+                          "countM9": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 9"
+                          },
+                          "countM10": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 10"
+                          },
+                          "countM11": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 11"
+                          },
+                          "countM12": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 12"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-repots-sum-mouth",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "year",
+            "description": "ปี ค.ศ.",
+            "required": true
+          }
+        ],
+        "description": ""
+      },
+      "parameters": []
+    },
+    "/reports/access/sum-month-by-method": {
+      "get": {
+        "summary": "Report Sum Month",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "method": {
+                            "type": "string",
+                            "description": "ฟังก์ชันที่เรียกใช้งาน"
+                          },
+                          "countM1": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 1"
+                          },
+                          "countM2": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 2"
+                          },
+                          "countM3": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 3"
+                          },
+                          "countM4": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 4"
+                          },
+                          "countM5": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 5"
+                          },
+                          "countM6": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 6"
+                          },
+                          "countM7": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 7"
+                          },
+                          "countM8": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 8"
+                          },
+                          "countM9": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 9"
+                          },
+                          "countM10": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 10"
+                          },
+                          "countM11": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 11"
+                          },
+                          "countM12": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 12"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-repots-sum-mouth",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "year",
+            "description": "ปี ค.ศ.",
+            "required": true
+          }
+        ],
+        "description": ""
+      },
+      "parameters": []
+    },
+    "/reports/access/sum-year": {
+      "get": {
+        "summary": "Report Sum Year",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "logCount": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "year": {
+                                  "type": "number",
+                                  "description": "ปีที่แสดงข้อมูล"
+                                },
+                                "count": {
+                                  "type": "number",
+                                  "description": "จำนวนที่ client เข้าใช้งานของปีที่แสดง"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-reports-sum-year",
+        "parameters": [
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "yearStart",
+            "description": "ปีที่เริ่ม ค.ศ.",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "yearEnd",
+            "description": "ปีที่สิ้นสุด ค.ศ.",
+            "required": true
+          }
+        ],
+        "description": "**เลือกระห่างของปีได้ไม่เกิน 5 ปี\n\nerror 400\n1. yearStart or yearEnd is undefined\n2. yearStart > yearEnd\n3. range of yearStart to yearEnd > 5 year\n"
+      },
+      "parameters": []
+    },
+    "/reports/meter/sum-month": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "countM1": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 1"
+                          },
+                          "countM2": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 2"
+                          },
+                          "countM3": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 3"
+                          },
+                          "countM4": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 4"
+                          },
+                          "countM5": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 5"
+                          },
+                          "countM6": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 6"
+                          },
+                          "countM7": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 7"
+                          },
+                          "countM8": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 8"
+                          },
+                          "countM9": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 9"
+                          },
+                          "countM10": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 10"
+                          },
+                          "countM11": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 11"
+                          },
+                          "countM12": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 12"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-reports-meter-sum-month",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "year",
+            "description": "ปี ค.ศ.",
+            "required": true
+          }
+        ]
+      }
+    },
+    "/reports/notify/send-outage/sum-month": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "countM1": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 1"
+                          },
+                          "countM2": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 2"
+                          },
+                          "countM3": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 3"
+                          },
+                          "countM4": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 4"
+                          },
+                          "countM5": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 5"
+                          },
+                          "countM6": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 6"
+                          },
+                          "countM7": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 7"
+                          },
+                          "countM8": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 8"
+                          },
+                          "countM9": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 9"
+                          },
+                          "countM10": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 10"
+                          },
+                          "countM11": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 11"
+                          },
+                          "countM12": {
+                            "type": "number",
+                            "description": "จำนวนที่ client เข้าใช้งานของเดือน 12"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-reports-notify-send-outage-sum-month",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "year",
+            "description": "ปี ค.ศ.",
+            "required": true
+          }
+        ],
+        "description": ""
+      }
+    },
+    "/reports/notify/send-outage/sum-year": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "clientId": {
+                            "type": "string",
+                            "description": "รหัส client"
+                          },
+                          "clientName": {
+                            "type": "string",
+                            "description": "name ของ client"
+                          },
+                          "notifyCount": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "year": {
+                                  "type": "number",
+                                  "description": "ปีที่แสดงข้อมูล"
+                                },
+                                "count": {
+                                  "type": "number",
+                                  "description": "จำนวนแจ้งไฟฟ้าขัดข้อง"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "meta": {
+                      "$ref": "../common/models/meta.v1.json"
+                    },
+                    "errors": {
+                      "$ref": "../common/models/errors.v1.json"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-reports-notify-send-outage-sum-year",
+        "description": "**เลือกระห่างของปีได้ไม่เกิน 5 ปี\n\nerror 400\n1. yearStart or yearEnd is undefined\n2. yearStart > yearEnd\n3. range of yearStart to yearEnd > 5 year",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "yearStart",
+            "description": "ปี ค.ศ. เริ่มต้น",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "yearEnd",
+            "description": "ปี ค.ศ.สิ้นสุด",
+            "required": true
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {}
+  }
+}
